@@ -34,6 +34,15 @@ sdk folder hit below command
 
 rq-sdk/ech-core-0.0.9=> add new file number in rq sdk folder
 
+
+Go to cd openapi json folder
+
+1)combined_openapi delete this file
+
+2)npx openapi-merge-cli
+
+3)going to browser swagger editor import combined open api jason enter in yaml last file & paste all data in file
+
 -rq sdk generate folder queries & request copy that folders & paste in cipher folder openAPI
 
 Add below code in request.ts line 115
