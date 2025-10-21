@@ -1,0 +1,17 @@
+{
+  "inputs": [
+    {
+      "inputURL": "http://34.193.146.39:8082/v3/api-docs",
+      "operationSelection": {
+        "excludeTags": ["Actuator"]
+      }
+    },
+    {
+      "inputURL": "http://34.193.146.39:8083/v3/api-docs",
+      "operationSelection": {
+        "excludeTags": ["Actuator"]
+      }
+    }
+  ],
+  "output": "./combined_openapi.json"
+}

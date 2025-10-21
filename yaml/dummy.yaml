@@ -1,0 +1,62 @@
+openapi: 3.0.3
+info:
+  title: Primary Health Partners API
+  description: Primary Health Partners API documentation
+  termsOfService: https://primary-healthpartners.com/
+  contact:
+    name: Primary Health Partners Support
+    url: https://primary-healthpartners.com/
+    email: support@.com
+  version: 0.0.1
+servers:
+  - url: https://dev.primaryplus.life/
+    description: Development Server for Primary Health Partners
+  - url: https://qa.primaryplus.life/
+    description: QA Server for Primary Health Partners
+paths:
+  /api/{userId}/status:
+    put:
+      tags:
+        - user-profile-resource
+          schema:
+            type: boolean
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+  /api/{id}/active/{active}:
+    put:
+      tags:
+        - department-resource
+      operationId: updateStatus
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: active
+          in: path
+          required: true
+          schema:
+            type: boolean
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+        empty:
+          type: boolean
+  securitySchemes:
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+
+   

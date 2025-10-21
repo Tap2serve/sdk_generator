@@ -1,0 +1,6910 @@
+openapi: 3.0.3
+info:
+  title: Primary Health Partners API
+  description: Primary Health Partners API documentation
+  termsOfService: https://primary-healthpartners.com/
+  contact:
+    name: Primary Health Partners Support
+    url: https://primary-healthpartners.com/
+    email: support@.com
+  version: 0.0.1
+servers:
+  - url: https://dev.primaryplus.life/
+    description: Development Server for Primary Health Partners
+  - url: https://qa.primaryplus.life/
+    description: QA Server for Primary Health Partners
+paths:
+  /api/v1/payment-transactions:
+    put:
+      tags:
+        - payment-transaction-controller
+      operationId: updatePaymentTransaction
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PaymentTransactionRequestDto"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    post:
+      tags:
+        - payment-transaction-controller
+      operationId: createPaymentTransaction
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PaymentTransactionRequestDto"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/master/{userId}/archive-status/{status}:
+    put:
+      tags:
+        - user-controller
+      summary: Archive/Unarchive User
+      description: Change User archive status to either archived or unarchived.
+      operationId: updateUserArchiveStatus
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: status
+          in: path
+          required: true
+          schema:
+            type: boolean
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/master/v1/provider:
+    put:
+      tags:
+        - provider-controller
+      operationId: updateProvider
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProviderRequestDto"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    post:
+      tags:
+        - provider-controller
+      operationId: addProvider
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProviderRequestDto"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/master/v1/plan:
+    get:
+      tags:
+        - plan-controller
+      operationId: getPlanAmount
+      parameters:
+        - name: primaryLeadUuid
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    put:
+      tags:
+        - plan-controller
+      operationId: updatePlan
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlanDto"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    post:
+      tags:
+        - plan-controller
+      operationId: createPlan
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlanDto"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/master/v1/plan/plan-details:
+    put:
+      tags:
+        - plan-controller
+      operationId: updatePlanDetails
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlanDetailsDto"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/master/v1/patient:
+    put:
+      tags:
+        - patient-controller
+      operationId: updatePatient
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PatientRequestDto"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    post:
+      tags:
+        - patient-controller
+      operationId: addPatient
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PatientRequestDto"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/master/v1/patient/create-update:
+    put:
+      tags:
+        - patient-controller
+      operationId: createUpdatePatient
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/PatientRequestDto"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/master/v1/lead:
+    put:
+      tags:
+        - lead-controller
+      operationId: updateLead
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LeadResponseDto"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    post:
+      tags:
+        - lead-controller
+      operationId: createLead
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LeadResponseDto"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/master/v1/lead/create-update:
+    put:
+      tags:
+        - lead-controller
+      operationId: createUpdateLead
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/LeadResponseDto"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/master/user:
+    put:
+      tags:
+        - user-controller
+      summary: Update Staff Users
+      description: >-
+        Edit Staff User with editable fields as firstName, lastName, phone,
+        roleType, role.
+      operationId: updateUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    post:
+      tags:
+        - user-controller
+      summary: Add Staff User
+      description: Add a new Staff User into the system
+      operationId: addUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/master/user/{userId}/status/{status}:
+    put:
+      tags:
+        - user-controller
+      summary: Enable/Disable User
+      description: >-
+        Change user status to either active or inactive to restrict user from
+        login
+      operationId: updateUserStatus
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: status
+          in: path
+          required: true
+          schema:
+            type: boolean
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/master/v1/provider/status:
+    patch:
+      tags:
+        - provider-controller
+      operationId: updateProviderStatus
+      parameters:
+        - name: status
+          in: query
+          required: true
+          schema:
+            type: boolean
+        - name: providerUuid
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/v1/payment-transactions/{paymentTransactionUuid}:
+    get:
+      tags:
+        - payment-transaction-controller
+      operationId: getPaymentTransactionByUuid
+      parameters:
+        - name: paymentTransactionUuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    delete:
+      tags:
+        - payment-transaction-controller
+      operationId: deletePaymentTransaction
+      parameters:
+        - name: paymentTransactionUuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/v1/payment-transactions/all:
+    get:
+      tags:
+        - payment-transaction-controller
+      operationId: getAllPaymentTransactions
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: pageSize
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 20
+        - name: sortBy
+          in: query
+          required: false
+          schema:
+            type: string
+            default: created
+        - name: sortDirection
+          in: query
+          required: false
+          schema:
+            type: string
+            default: desc
+        - name: searchString
+          in: query
+          required: false
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/master/v1/provider/{providerUuid}:
+    get:
+      tags:
+        - provider-controller
+      operationId: getProviderByUuid
+      parameters:
+        - name: providerUuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    delete:
+      tags:
+        - provider-controller
+      operationId: deleteProviderByUuid
+      parameters:
+        - name: providerUuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/master/v1/provider/all:
+    get:
+      tags:
+        - provider-controller
+      operationId: getAllProviders
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: pageSize
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 20
+        - name: sortBy
+          in: query
+          required: false
+          schema:
+            type: string
+            default: created
+        - name: sortDirection
+          in: query
+          required: false
+          schema:
+            type: string
+            default: desc
+        - name: longitude
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: latitude
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: patientAge
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: filterBy
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: filterValue
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - name: searchString
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: zipcode
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: status
+          in: query
+          required: false
+          schema:
+            type: boolean
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/master/v1/plan/{planUuid}:
+    get:
+      tags:
+        - plan-controller
+      operationId: getPlanByUuid
+      parameters:
+        - name: planUuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    delete:
+      tags:
+        - plan-controller
+      operationId: deletePlanByUuid
+      parameters:
+        - name: planUuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/master/v1/plan/{planUuid}/plan-details:
+    get:
+      tags:
+        - plan-controller
+      operationId: getAllPlan
+      parameters:
+        - name: planUuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/master/v1/plan/check-my-plan:
+    get:
+      tags:
+        - plan-controller
+      operationId: checkMyPlan
+      parameters:
+        - name: primaryLeadUuid
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: defaultBillingPeriod
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - ANNUAL
+              - MONTH
+              - QUARTERLY
+              - SEMI_ANNUALLY
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/master/v1/plan/all:
+    get:
+      tags:
+        - plan-controller
+      operationId: getAllPlan_1
+      parameters:
+        - name: search
+          in: query
+          required: false
+          schema:
+            type: string
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/master/v1/patient/{patientUuid}:
+    get:
+      tags:
+        - patient-controller
+      operationId: getPatientByUuid
+      parameters:
+        - name: patientUuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    delete:
+      tags:
+        - patient-controller
+      operationId: deletePatientByUuid
+      parameters:
+        - name: patientUuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/master/v1/patient/plan-details/{patientUuid}:
+    get:
+      tags:
+        - patient-controller
+      operationId: getPatientPlanDetails
+      parameters:
+        - name: patientUuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/master/v1/patient/overview/{patientUuid}:
+    get:
+      tags:
+        - patient-controller
+      operationId: getPatientOverview
+      parameters:
+        - name: patientUuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/master/v1/patient/membership/{patientUuid}:
+    get:
+      tags:
+        - patient-controller
+      operationId: getPatientMemberShip
+      parameters:
+        - name: patientUuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/master/v1/patient/all:
+    get:
+      tags:
+        - patient-controller
+      operationId: getAllPatient
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: pageSize
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 20
+        - name: sortBy
+          in: query
+          required: false
+          schema:
+            type: string
+            default: created
+        - name: sortDirection
+          in: query
+          required: false
+          schema:
+            type: string
+            default: desc
+        - name: searchString
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: startDate
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: endDate
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: employerUuids
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+              format: uuid
+        - name: status
+          in: query
+          required: false
+          schema:
+            type: boolean
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/master/v1/lead/{leadUuid}:
+    get:
+      tags:
+        - lead-controller
+      operationId: getLeadByUuid
+      parameters:
+        - name: leadUuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    delete:
+      tags:
+        - lead-controller
+      operationId: deleteLeadByUuid
+      parameters:
+        - name: leadUuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/master/v1/lead/all:
+    get:
+      tags:
+        - lead-controller
+      operationId: getAllLead
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: pageSize
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 20
+        - name: sortBy
+          in: query
+          required: false
+          schema:
+            type: string
+            default: created
+        - name: sortDirection
+          in: query
+          required: false
+          schema:
+            type: string
+            default: desc
+        - name: searchString
+          in: query
+          required: false
+          schema:
+            type: string
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/master/users:
+    get:
+      tags:
+        - user-controller
+      summary: List Staff Users
+      description: >-
+        List staff users using Filter with Pagination and Sorting with filter
+        options on status, archive and role and search functionality on
+        firstName, lastName and email,
+      operationId: getAllUsers
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: size
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 20
+        - name: sortBy
+          in: query
+          required: false
+          schema:
+            type: string
+            default: created
+        - name: sortDirection
+          in: query
+          required: false
+          schema:
+            type: string
+            default: desc
+        - name: status
+          in: query
+          required: false
+          schema:
+            type: boolean
+        - name: archive
+          in: query
+          required: false
+          schema:
+            type: boolean
+        - name: role
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: roleType
+          in: query
+          required: false
+          schema:
+            type: string
+            default: STAFF
+            enum:
+              - ADMIN
+              - USER
+              - EHR
+              - EMPLOYER
+              - PATIENT
+              - AGENT
+        - name: searchString
+          in: query
+          required: false
+          schema:
+            type: string
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/master/user/{userId}:
+    get:
+      tags:
+        - user-controller
+      summary: Staff User
+      description: Get Staff User by userUuid
+      operationId: getUser
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/master/profile:
+    get:
+      tags:
+        - user-controller
+      summary: User Profile
+      description: Get Logged-in User Profile
+      operationId: getProfile
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/vaccine/{uuid}:
+    get:
+      tags:
+        - vaccine-controller
+      operationId: getVaccineByUuid
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    put:
+      tags:
+        - vaccine-controller
+      operationId: updateVaccine
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VaccineDto"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    delete:
+      tags:
+        - vaccine-controller
+      operationId: deleteVaccineByUuid
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/referral/update/{referralByUuid}:
+    put:
+      tags:
+        - referral-controller
+      operationId: updateReferralByUuid
+      parameters:
+        - name: referralByUuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReferralRequest"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/pharmacy/{uuid}:
+    get:
+      tags:
+        - pharmacy-controller
+      operationId: getPharmacyByUuid
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    put:
+      tags:
+        - pharmacy-controller
+      operationId: updatePharmacy
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PharmacyDto"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    delete:
+      tags:
+        - pharmacy-controller
+      operationId: deletePharmacy
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/patient-vaccination/{uuid}:
+    get:
+      tags:
+        - patient-vaccination-controller
+      operationId: getPatientVaccinationByUuid
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    put:
+      tags:
+        - patient-vaccination-controller
+      operationId: updatePatientVaccination
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PatientVaccinationDto"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    delete:
+      tags:
+        - patient-vaccination-controller
+      operationId: deletePatientVaccination
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/patient-flag/{uuid}:
+    get:
+      tags:
+        - patient-flag-controller
+      operationId: getPatientFlagByUuid
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    put:
+      tags:
+        - patient-flag-controller
+      operationId: updatePatientFlag
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PatientFlagDto"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    delete:
+      tags:
+        - patient-flag-controller
+      operationId: deletePatientFlag
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/past-surgical-history/{uuid}:
+    get:
+      tags:
+        - past-surgical-history-controller
+      operationId: getPastSurgicalHistoryByUuid
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    put:
+      tags:
+        - past-surgical-history-controller
+      operationId: updatePastSurgicalHistory
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PastSurgicalHistoryDto"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    delete:
+      tags:
+        - past-surgical-history-controller
+      operationId: deletePastSurgicalHistoryByUuid
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/past-medical-history/{uuid}:
+    get:
+      tags:
+        - past-medical-history-controller
+      operationId: getPastMedicalHistoryByUuid
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    put:
+      tags:
+        - past-medical-history-controller
+      operationId: updatePastMedicalHistory
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PastMedicalHistoryDto"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    delete:
+      tags:
+        - past-medical-history-controller
+      operationId: deletePastMedicalHistoryByUuid
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/note/update/{noteByUuid}:
+    put:
+      tags:
+        - note-controller
+      operationId: updateNoteByUuid
+      parameters:
+        - name: noteByUuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NoteRequest"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/medication/{medicationUuid}:
+    get:
+      tags:
+        - medication-controller
+      operationId: getMedicationByUuid
+      parameters:
+        - name: medicationUuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    put:
+      tags:
+        - medication-controller
+      operationId: updateMedicationByUuid
+      parameters:
+        - name: medicationUuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicationRequest"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    delete:
+      tags:
+        - medication-controller
+      operationId: deleteMedicationByUuid
+      parameters:
+        - name: medicationUuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/location:
+    put:
+      tags:
+        - location-controller
+      operationId: updateLocation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LocationRequestDto"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    post:
+      tags:
+        - location-controller
+      operationId: addLocation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LocationRequestDto"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/location-group:
+    put:
+      tags:
+        - location-group-controller
+      operationId: updateLocationGroup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LocationGroupRequest"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    post:
+      tags:
+        - location-group-controller
+      operationId: addLocationGroup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LocationGroupRequest"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/link-pharmacy/set-default:
+    put:
+      tags:
+        - patient-link-pharmacy-controller
+      operationId: setDefaultPharmacy
+      parameters:
+        - name: patientUuid
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: pharmacyUuid
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/invoice/{invoiceUuid}:
+    get:
+      tags:
+        - invoice-controller
+      operationId: getInvoiceByUuid
+      parameters:
+        - name: invoiceUuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    put:
+      tags:
+        - invoice-controller
+      operationId: updateInvoiceByUuid
+      parameters:
+        - name: invoiceUuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InvoiceRequest"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    delete:
+      tags:
+        - invoice-controller
+      operationId: deleteInvoiceByUuid
+      parameters:
+        - name: invoiceUuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/insurance:
+    put:
+      tags:
+        - insurance-controller
+      operationId: updateInsurance
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/InsuranceDetailsDto"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    post:
+      tags:
+        - insurance-controller
+      operationId: createInsurance
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InsuranceDetailsDto"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/imaging_result/{imagingResultByUuid}:
+    get:
+      tags:
+        - imaging-result-controller
+      operationId: getImagingResultByUuid
+      parameters:
+        - name: imagingResultByUuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    put:
+      tags:
+        - imaging-result-controller
+      operationId: updateImagingResult
+      parameters:
+        - name: imagingResultByUuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ImagingResultRequest"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    delete:
+      tags:
+        - imaging-result-controller
+      operationId: deleteImagingResultByUuid
+      parameters:
+        - name: imagingResultByUuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/imaging_order/{imagingOrderByUuid}:
+    get:
+      tags:
+        - imaging-order-controller
+      operationId: getImagingOrderByUuid
+      parameters:
+        - name: imagingOrderByUuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    put:
+      tags:
+        - imaging-order-controller
+      operationId: updateImagingOrder
+      parameters:
+        - name: imagingOrderByUuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ImagingOrderRequest"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    delete:
+      tags:
+        - imaging-order-controller
+      operationId: deleteImagingOrderByUuid
+      parameters:
+        - name: imagingOrderByUuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/icd-code/{uuid}:
+    get:
+      tags:
+        - icd-code-controller
+      operationId: getIcdCodeByUuid
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    put:
+      tags:
+        - icd-code-controller
+      operationId: updateIcdCode
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/IcdCodeDto"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    delete:
+      tags:
+        - icd-code-controller
+      operationId: deleteIcdCodeByUuid
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/family-history/{uuid}:
+    get:
+      tags:
+        - family-history-controller
+      operationId: getFamilyHistoryByUuid
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    put:
+      tags:
+        - family-history-controller
+      operationId: updateFamilyHistory
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FamilyHistoryDto"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    delete:
+      tags:
+        - family-history-controller
+      operationId: deleteFamilyHistoryByUuid
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/drug-intolerance/{uuid}:
+    put:
+      tags:
+        - drug-intolerance-controller
+      operationId: updateDrugIntolerance
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DrugIntoleranceDto"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/document_type/update:
+    put:
+      tags:
+        - document-type-controller
+      operationId: updateDocumentType
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/UpdateDocumentTypeRequest"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/diagnosis/{uuid}:
+    get:
+      tags:
+        - diagnosis-controller
+      operationId: getDiagnosisByUuid
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    put:
+      tags:
+        - diagnosis-controller
+      operationId: updateDiagnosis
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DiagnosisDto"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    delete:
+      tags:
+        - diagnosis-controller
+      operationId: deleteDiagnosis
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/allergy/{uuid}:
+    get:
+      tags:
+        - allergy-controller
+      operationId: getAllergyByUuid
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    put:
+      tags:
+        - allergy-controller
+      operationId: updateAllergy
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AllergyDto"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    delete:
+      tags:
+        - allergy-controller
+      operationId: deleteAllergyByUUId
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/vaccine:
+    post:
+      tags:
+        - vaccine-controller
+      operationId: createVaccine
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VaccineDto"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/referral/create:
+    post:
+      tags:
+        - referral-controller
+      operationId: saveReferral
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReferralRequest"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/pharmacy:
+    post:
+      tags:
+        - pharmacy-controller
+      operationId: addPharmacy
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PharmacyDto"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/patient-vaccination:
+    post:
+      tags:
+        - patient-vaccination-controller
+      operationId: createPatientVaccination
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PatientVaccinationDto"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/patient-flag:
+    post:
+      tags:
+        - patient-flag-controller
+      operationId: addPatientFlag
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PatientFlagDto"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/past-surgical-history:
+    post:
+      tags:
+        - past-surgical-history-controller
+      operationId: addPastSurgicalHistory
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PastSurgicalHistoryDto"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/past-medical-history:
+    post:
+      tags:
+        - past-medical-history-controller
+      operationId: addPastMedicalHistory
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PastMedicalHistoryDto"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/note/create:
+    post:
+      tags:
+        - note-controller
+      operationId: saveNote
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NoteRequest"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/medication/create:
+    post:
+      tags:
+        - medication-controller
+      operationId: saveMedication
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicationRequest"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/link-pharmacy/link:
+    post:
+      tags:
+        - patient-link-pharmacy-controller
+      operationId: linkPharmacy
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PatientLinkedPharmacyDto"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/invoice/create:
+    post:
+      tags:
+        - invoice-controller
+      operationId: saveInvoice
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InvoiceRequest"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/imaging_result/create:
+    post:
+      tags:
+        - imaging-result-controller
+      operationId: saveImagingResult
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ImagingResultRequest"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/imaging_order/create:
+    post:
+      tags:
+        - imaging-order-controller
+      operationId: saveImagingOrder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ImagingOrderRequest"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/icd-code:
+    post:
+      tags:
+        - icd-code-controller
+      operationId: createIcdCode
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/IcdCodeDto"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/family-history:
+    post:
+      tags:
+        - family-history-controller
+      operationId: addFamilyHistory
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FamilyHistoryDto"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/drug-intolerance:
+    post:
+      tags:
+        - drug-intolerance-controller
+      operationId: addDrugIntolerance
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DrugIntoleranceDto"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/document_type/create:
+    post:
+      tags:
+        - document-type-controller
+      operationId: saveDocumentType
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DocumentTypeRequest"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/document/create:
+    post:
+      tags:
+        - document-controller
+      operationId: saveDocument
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DocumentRequest"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/diagnosis:
+    post:
+      tags:
+        - diagnosis-controller
+      operationId: addDiagnosis
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DiagnosisDto"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/contact_directory/create:
+    post:
+      tags:
+        - contact-directory-controller
+      operationId: saveContactDirectory
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ContactDirectoryRequest"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/aws/upload/image/multipart:
+    post:
+      tags:
+        - aws-controller
+      operationId: uploadImageAsMultipart
+      parameters:
+        - name: referenceType
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - LOCATION_PROFILE
+              - PROVIDER_PROFILE
+              - PATIENT_DOCUMENTS
+              - PATIENT_PROFILE
+              - LAB_ORDER
+              - INSURANCE
+        - name: userUuid
+          in: query
+          required: false
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - file
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/aws/upload/image/base64:
+    post:
+      tags:
+        - aws-controller
+      operationId: uploadImageAsBase64
+      parameters:
+        - name: userUuid
+          in: query
+          required: false
+          schema:
+            type: string
+            format: uuid
+        - name: referenceType
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - LOCATION_PROFILE
+              - PROVIDER_PROFILE
+              - PATIENT_DOCUMENTS
+              - PATIENT_PROFILE
+              - LAB_ORDER
+              - INSURANCE
+        - name: base64
+          in: query
+          required: true
+          schema:
+            type: string
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/aws/upload/document/multipart:
+    post:
+      tags:
+        - aws-controller
+      operationId: uploadDocumentAsMultipart
+      parameters:
+        - name: referenceType
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - LOCATION_PROFILE
+              - PROVIDER_PROFILE
+              - PATIENT_DOCUMENTS
+              - PATIENT_PROFILE
+              - LAB_ORDER
+              - INSURANCE
+        - name: userUuid
+          in: query
+          required: false
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - file
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/aws/upload/document/base64:
+    post:
+      tags:
+        - aws-controller
+      operationId: uploadDocumentAsBase64
+      parameters:
+        - name: base64
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: userUuid
+          in: query
+          required: false
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/allergy:
+    post:
+      tags:
+        - allergy-controller
+      operationId: addAllergy
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AllergyDto"
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/diagnosis/resolved-diagnosis/{uuid}:
+    patch:
+      tags:
+        - diagnosis-controller
+      operationId: resolvedDiagnosis
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/vaccine/all:
+    get:
+      tags:
+        - vaccine-controller
+      operationId: getAllVaccines
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: pageSize
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 20
+        - name: type
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - ADULT
+              - CHILD
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/referral/{referralByUuid}:
+    get:
+      tags:
+        - referral-controller
+      operationId: getReferralByUuid
+      parameters:
+        - name: referralByUuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    delete:
+      tags:
+        - referral-controller
+      operationId: deleteReferralByUuid
+      parameters:
+        - name: referralByUuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/referral/all:
+    get:
+      tags:
+        - referral-controller
+      operationId: getAllReferrals
+      parameters:
+        - name: patientUuid
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: fax
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: phone
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: email
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: stat
+          in: query
+          required: false
+          schema:
+            type: boolean
+        - name: referralType
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - IMAGING
+              - SPECIALIST
+        - name: createdStartDate
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+        - name: page
+          in: query
+          description: Zero-based page index (0..N)
+          required: false
+          schema:
+            minimum: 0
+            type: integer
+            default: 0
+        - name: size
+          in: query
+          description: The size of the page to be returned
+          required: false
+          schema:
+            minimum: 1
+            type: integer
+            default: 20
+        - name: sort
+          in: query
+          description: >-
+            Sorting criteria in the format: property,(asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/procedure_code/all:
+    get:
+      tags:
+        - procedure-code-controller
+      operationId: getProcedureCodes
+      parameters:
+        - name: code
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: Zero-based page index (0..N)
+          required: false
+          schema:
+            minimum: 0
+            type: integer
+            default: 0
+        - name: size
+          in: query
+          description: The size of the page to be returned
+          required: false
+          schema:
+            minimum: 1
+            type: integer
+            default: 20
+        - name: sort
+          in: query
+          description: >-
+            Sorting criteria in the format: property,(asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/pharmacy/all:
+    get:
+      tags:
+        - pharmacy-controller
+      operationId: getAllPharmacies
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: pageSize
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 20
+        - name: sortBy
+          in: query
+          required: false
+          schema:
+            type: string
+            default: created
+        - name: sortDirection
+          in: query
+          required: false
+          schema:
+            type: string
+            default: desc
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/patient-vaccination/all:
+    get:
+      tags:
+        - patient-vaccination-controller
+      operationId: getAllPatientVaccination
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: pageSize
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 20
+        - name: sortBy
+          in: query
+          required: false
+          schema:
+            type: string
+            default: created
+        - name: sortDirection
+          in: query
+          required: false
+          schema:
+            type: string
+            default: desc
+        - name: patientUuid
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/patient-vaccination/all/vaccine-table:
+    get:
+      tags:
+        - patient-vaccination-controller
+      operationId: getAllPatientVaccinationForVaccineTable
+      parameters:
+        - name: patientUuid
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/patient-flag/all:
+    get:
+      tags:
+        - patient-flag-controller
+      operationId: getAllPatientFlags
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: pageSize
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 20
+        - name: sortBy
+          in: query
+          required: false
+          schema:
+            type: string
+            default: created
+        - name: sortDirection
+          in: query
+          required: false
+          schema:
+            type: string
+            default: desc
+        - name: patientUuid
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/past-surgical-history/all:
+    get:
+      tags:
+        - past-surgical-history-controller
+      operationId: getAllPastSurgicalHistory
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: pageSize
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 20
+        - name: sortBy
+          in: query
+          required: false
+          schema:
+            type: string
+            default: created
+        - name: sortDirection
+          in: query
+          required: false
+          schema:
+            type: string
+            default: desc
+        - name: patientUuid
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/past-medical-history/all:
+    get:
+      tags:
+        - past-medical-history-controller
+      operationId: getAllPastMedicalHistory
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: pageSize
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 20
+        - name: sortBy
+          in: query
+          required: false
+          schema:
+            type: string
+            default: created
+        - name: sortDirection
+          in: query
+          required: false
+          schema:
+            type: string
+            default: desc
+        - name: patientUuid
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/order_study/all:
+    get:
+      tags:
+        - order-study-controller
+      operationId: getAllDocuments
+      parameters:
+        - name: studyName
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: Zero-based page index (0..N)
+          required: false
+          schema:
+            minimum: 0
+            type: integer
+            default: 0
+        - name: size
+          in: query
+          description: The size of the page to be returned
+          required: false
+          schema:
+            minimum: 1
+            type: integer
+            default: 20
+        - name: sort
+          in: query
+          description: >-
+            Sorting criteria in the format: property,(asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/note/{noteByUuid}:
+    get:
+      tags:
+        - note-controller
+      operationId: getNoteByUuid
+      parameters:
+        - name: noteByUuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    delete:
+      tags:
+        - note-controller
+      operationId: deleteNoteByUuid
+      parameters:
+        - name: noteByUuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/note/all:
+    get:
+      tags:
+        - note-controller
+      operationId: getAllNotes
+      parameters:
+        - name: patientUuid
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: documentNote
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - INTERNAL_NOTE
+              - EXTERNAL_NOTE
+        - name: note
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: createdDate
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+        - name: modifiedDate
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+        - name: page
+          in: query
+          description: Zero-based page index (0..N)
+          required: false
+          schema:
+            minimum: 0
+            type: integer
+            default: 0
+        - name: size
+          in: query
+          description: The size of the page to be returned
+          required: false
+          schema:
+            minimum: 1
+            type: integer
+            default: 20
+        - name: sort
+          in: query
+          description: >-
+            Sorting criteria in the format: property,(asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/medication/all:
+    get:
+      tags:
+        - medication-controller
+      operationId: getAllMedications
+      parameters:
+        - name: patientUuid
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: medicationStatus
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - ACTIVE
+              - PAST
+              - PENDING
+              - ONGOING
+              - COMPLETED
+        - name: page
+          in: query
+          description: Zero-based page index (0..N)
+          required: false
+          schema:
+            minimum: 0
+            type: integer
+            default: 0
+        - name: size
+          in: query
+          description: The size of the page to be returned
+          required: false
+          schema:
+            minimum: 1
+            type: integer
+            default: 20
+        - name: sort
+          in: query
+          description: >-
+            Sorting criteria in the format: property,(asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/location/{locationUuid}:
+    get:
+      tags:
+        - location-controller
+      operationId: getLocationByUuid
+      parameters:
+        - name: locationUuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    delete:
+      tags:
+        - location-controller
+      operationId: deleteLocationByUuid
+      parameters:
+        - name: locationUuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/location/all:
+    get:
+      tags:
+        - location-controller
+      operationId: getAllLocation
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: pageSize
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 20
+        - name: sortBy
+          in: query
+          required: false
+          schema:
+            type: string
+            default: created
+        - name: sortDirection
+          in: query
+          required: false
+          schema:
+            type: string
+            default: desc
+        - name: searchString
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: status
+          in: query
+          required: false
+          schema:
+            type: boolean
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/location-group/{locationGroupUuid}:
+    get:
+      tags:
+        - location-group-controller
+      operationId: getLocationGroupByUuid
+      parameters:
+        - name: locationGroupUuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    delete:
+      tags:
+        - location-group-controller
+      operationId: deleteLocationGroupByUuid
+      parameters:
+        - name: locationGroupUuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/location-group/all:
+    get:
+      tags:
+        - location-group-controller
+      operationId: getAllLocationGroup
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: pageSize
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 20
+        - name: sortBy
+          in: query
+          required: false
+          schema:
+            type: string
+            default: created
+        - name: sortDirection
+          in: query
+          required: false
+          schema:
+            type: string
+            default: desc
+        - name: searchString
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: status
+          in: query
+          required: false
+          schema:
+            type: boolean
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/link-pharmacy/all:
+    get:
+      tags:
+        - patient-link-pharmacy-controller
+      operationId: getAllPharmaciesForPatient
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: pageSize
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 20
+        - name: sortBy
+          in: query
+          required: false
+          schema:
+            type: string
+            default: created
+        - name: sortDirection
+          in: query
+          required: false
+          schema:
+            type: string
+            default: desc
+        - name: patientUuid
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/invoice/all:
+    get:
+      tags:
+        - invoice-controller
+      operationId: getAllInvoices
+      parameters:
+        - name: patientUuid
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: localDate
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+        - name: invoiceId
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: invoiceChargeType
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - MEMBERSHIP_CHARGE
+              - PROCEDURE_CHARGE
+              - MEDICATION_CHARGE
+              - LAB_CHARGE
+              - PANEL_CHARGE
+        - name: invoiceStatus
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - PAID
+              - PARTIALLY_PAID
+              - UNPAID
+        - name: page
+          in: query
+          description: Zero-based page index (0..N)
+          required: false
+          schema:
+            minimum: 0
+            type: integer
+            default: 0
+        - name: size
+          in: query
+          description: The size of the page to be returned
+          required: false
+          schema:
+            minimum: 1
+            type: integer
+            default: 20
+        - name: sort
+          in: query
+          description: >-
+            Sorting criteria in the format: property,(asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/insurance/{insuranceUuid}:
+    get:
+      tags:
+        - insurance-controller
+      operationId: getInsuranceByUuid
+      parameters:
+        - name: insuranceUuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    delete:
+      tags:
+        - insurance-controller
+      operationId: deleteInsuranceByUuid
+      parameters:
+        - name: insuranceUuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/insurance/all:
+    get:
+      tags:
+        - insurance-controller
+      operationId: getAllPatientInsurance
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: pageSize
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 20
+        - name: sortBy
+          in: query
+          required: false
+          schema:
+            type: string
+            default: created
+        - name: sortDirection
+          in: query
+          required: false
+          schema:
+            type: string
+            default: desc
+        - name: searchString
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: patientUuid
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/imaging_result/all:
+    get:
+      tags:
+        - imaging-result-controller
+      operationId: getAllImagingResults
+      parameters:
+        - name: patientUuid
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: page
+          in: query
+          description: Zero-based page index (0..N)
+          required: false
+          schema:
+            minimum: 0
+            type: integer
+            default: 0
+        - name: size
+          in: query
+          description: The size of the page to be returned
+          required: false
+          schema:
+            minimum: 1
+            type: integer
+            default: 20
+        - name: sort
+          in: query
+          description: >-
+            Sorting criteria in the format: property,(asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/imaging_order/all:
+    get:
+      tags:
+        - imaging-order-controller
+      operationId: getAllImagingOrder
+      parameters:
+        - name: patientUuid
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: page
+          in: query
+          description: Zero-based page index (0..N)
+          required: false
+          schema:
+            minimum: 0
+            type: integer
+            default: 0
+        - name: size
+          in: query
+          description: The size of the page to be returned
+          required: false
+          schema:
+            minimum: 1
+            type: integer
+            default: 20
+        - name: sort
+          in: query
+          description: >-
+            Sorting criteria in the format: property,(asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/icd-code/all:
+    get:
+      tags:
+        - icd-code-controller
+      operationId: getAllIcdCodes
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: pageSize
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 20
+        - name: sortBy
+          in: query
+          required: false
+          schema:
+            type: string
+            default: created
+        - name: sortDirection
+          in: query
+          required: false
+          schema:
+            type: string
+            default: desc
+        - name: searchString
+          in: query
+          required: false
+          schema:
+            type: string
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/family-history/all:
+    get:
+      tags:
+        - family-history-controller
+      operationId: getAllFamilyHistory
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: pageSize
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 20
+        - name: sortBy
+          in: query
+          required: false
+          schema:
+            type: string
+            default: created
+        - name: sortDirection
+          in: query
+          required: false
+          schema:
+            type: string
+            default: desc
+        - name: patientUuid
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/drug-intolerance/{drugIntoleranceUuid}:
+    get:
+      tags:
+        - drug-intolerance-controller
+      operationId: getDrugIntoleranceByUuid
+      parameters:
+        - name: drugIntoleranceUuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    delete:
+      tags:
+        - drug-intolerance-controller
+      operationId: deleteDrugIntoleranceByUuid
+      parameters:
+        - name: drugIntoleranceUuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/drug-intolerance/all:
+    get:
+      tags:
+        - drug-intolerance-controller
+      operationId: getAllDrugIntolerances
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: pageSize
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 20
+        - name: sortBy
+          in: query
+          required: false
+          schema:
+            type: string
+            default: created
+        - name: sortDirection
+          in: query
+          required: false
+          schema:
+            type: string
+            default: desc
+        - name: patientUuid
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/document_type/{documentTypeUuid}:
+    get:
+      tags:
+        - document-type-controller
+      operationId: getDocumentTypeByUuid
+      parameters:
+        - name: documentTypeUuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    delete:
+      tags:
+        - document-type-controller
+      operationId: deleteDocumentTypeByUuid
+      parameters:
+        - name: documentTypeUuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/document_type/all:
+    get:
+      tags:
+        - document-type-controller
+      operationId: getAllDocumentTypes
+      parameters:
+        - name: documentType
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: Zero-based page index (0..N)
+          required: false
+          schema:
+            minimum: 0
+            type: integer
+            default: 0
+        - name: size
+          in: query
+          description: The size of the page to be returned
+          required: false
+          schema:
+            minimum: 1
+            type: integer
+            default: 20
+        - name: sort
+          in: query
+          description: >-
+            Sorting criteria in the format: property,(asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/document/{documentUuid}:
+    get:
+      tags:
+        - document-controller
+      operationId: getDocumentByUuid
+      parameters:
+        - name: documentUuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    delete:
+      tags:
+        - document-controller
+      operationId: deleteDocumentByUuid
+      parameters:
+        - name: documentUuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/document/all:
+    get:
+      tags:
+        - document-controller
+      operationId: getAllDocuments_1
+      parameters:
+        - name: patientUuid
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: fileName
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: documentType
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: Zero-based page index (0..N)
+          required: false
+          schema:
+            minimum: 0
+            type: integer
+            default: 0
+        - name: size
+          in: query
+          description: The size of the page to be returned
+          required: false
+          schema:
+            minimum: 1
+            type: integer
+            default: 20
+        - name: sort
+          in: query
+          description: >-
+            Sorting criteria in the format: property,(asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/diagnosis/all:
+    get:
+      tags:
+        - diagnosis-controller
+      operationId: getAllDiagnoses
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: pageSize
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 20
+        - name: sortBy
+          in: query
+          required: false
+          schema:
+            type: string
+            default: created
+        - name: sortDirection
+          in: query
+          required: false
+          schema:
+            type: string
+            default: desc
+        - name: searchString
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: type
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - ACUTE
+              - CHRONIC
+        - name: status
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - ACTIVE
+              - HISTORICAL
+              - RESOLVED
+        - name: patientUuid
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/contact_directory/{contactDirectoryUuid}:
+    get:
+      tags:
+        - contact-directory-controller
+      operationId: getContactDirectoryUuid
+      parameters:
+        - name: contactDirectoryUuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+    delete:
+      tags:
+        - contact-directory-controller
+      operationId: deleteContactDirectoryByUuid
+      parameters:
+        - name: contactDirectoryUuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/contact_directory/all:
+    get:
+      tags:
+        - contact-directory-controller
+      operationId: getAllContactDirectory
+      parameters:
+        - name: referralType
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - IMAGING
+              - SPECIALIST
+        - name: page
+          in: query
+          description: Zero-based page index (0..N)
+          required: false
+          schema:
+            minimum: 0
+            type: integer
+            default: 0
+        - name: size
+          in: query
+          description: The size of the page to be returned
+          required: false
+          schema:
+            minimum: 1
+            type: integer
+            default: 20
+        - name: sort
+          in: query
+          description: >-
+            Sorting criteria in the format: property,(asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/aws/auth/pre-signed-url:
+    get:
+      tags:
+        - aws-controller
+      operationId: getFile
+      parameters:
+        - name: key
+          in: query
+          required: true
+          schema:
+            type: string
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/aws/pre-signed-url:
+    get:
+      tags:
+        - aws-controller
+      operationId: getFile_1
+      parameters:
+        - name: key
+          in: query
+          required: true
+          schema:
+            type: string
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/audit_history/{entityName}/{auditUuid}:
+    get:
+      tags:
+        - audit-history-controller
+      operationId: getAuditHistoryByUuid
+      parameters:
+        - name: entityName
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: auditUuid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/audit_history/all:
+    get:
+      tags:
+        - audit-history-controller
+      operationId: getAllAuditHistory
+      parameters:
+        - name: entityNames
+          in: query
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: startDate
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+        - name: endDate
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+        - name: patientUuid
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: page
+          in: query
+          description: Zero-based page index (0..N)
+          required: false
+          schema:
+            minimum: 0
+            type: integer
+            default: 0
+        - name: size
+          in: query
+          description: The size of the page to be returned
+          required: false
+          schema:
+            minimum: 1
+            type: integer
+            default: 20
+        - name: sort
+          in: query
+          description: >-
+            Sorting criteria in the format: property,(asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+  /api/ehr/v1/allergy/all:
+    get:
+      tags:
+        - allergy-controller
+      operationId: getAllAllergies
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: pageSize
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 20
+        - name: sortBy
+          in: query
+          required: false
+          schema:
+            type: string
+            default: created
+        - name: sortDirection
+          in: query
+          required: false
+          schema:
+            type: string
+            default: desc
+        - name: patientUuid
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Response"
+components:
+  schemas:
+    PaymentTransactionRequestDto:
+      type: object
+      properties:
+        paymentTransactionUuid:
+          type: string
+          format: uuid
+        planUuid:
+          type: string
+          format: uuid
+        patientUuid:
+          type: string
+          format: uuid
+        leadUuid:
+          type: string
+          format: uuid
+        customerType:
+          type: string
+          enum:
+            - LEAD
+            - PATIENT
+        individualAmount:
+          type: number
+          format: double
+        defaultBillingPeriod:
+          type: string
+          enum:
+            - ANNUAL
+            - MONTH
+            - QUARTERLY
+            - SEMI_ANNUALLY
+        startPlanDateTime:
+          type: string
+          format: date
+        endPlanDateTime:
+          type: string
+          format: date
+        paymentMethod:
+          type: string
+          enum:
+            - CREDIT_CARD
+            - BANK
+        paymentStatus:
+          type: string
+          enum:
+            - COMPLETED
+            - FAILED
+            - OVERDUE
+            - DUE
+        totalAmount:
+          type: number
+          format: double
+    Response:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date-time
+        code:
+          type: string
+          enum:
+            - INTERNAL_ERROR
+            - ACCESS_DENIED
+            - BAD_REQUEST
+            - NOT_FOUND
+            - CREATED
+            - UNSUPPORTED_MEDIA_TYPE
+            - OK
+            - SERVICE_UNAVAILABLE
+            - ENTITY
+            - DB_ERROR
+            - IAM_ERROR
+            - AWS_ERROR
+            - USER_ARCHIVED
+            - USER_UNARCHIVED
+            - USER_NOT_EXIST
+            - BILLING_INVOICE_STATEMENT
+            - INVOICE_CREATED
+            - INVOICE_UPDATED
+            - INVOICE_DELETED
+            - INVOICE_VIEWED
+            - INVOICE_SENT
+            - INVOICE_GENERATED
+            - PAYMENT_RECEIVED
+            - INVOICE_MARKED_PAID
+            - INVOICE_DOWNLOADED
+            - INVOICE_PRINTED
+            - INVOICES_FETCHED
+            - CONTACT_DIRECTORY_CREATED
+            - CONTACT_DIRECTORY_UPDATED
+            - CONTACT_DIRECTORY_DELETED
+            - CONTACT_DIRECTORY_VIEWED
+            - CONTACT_DIRECTORY_FETCHED
+            - CONTACT_DIRECTORY_LIST_FETCHED
+            - CONTACT_DIRECTORY_SEARCHED
+            - CONTACT_DIRECTORY_SHARED
+            - NOTE_CREATED
+            - NOTE_UPDATED
+            - NOTE_DELETED
+            - NOTE_VIEWED
+            - NOTE_FETCHED
+            - NOTE_SHARED
+            - NOTE_ARCHIVED
+            - NOTE_UNARCHIVED
+            - NOTE_PINNED
+            - NOTE_UNPINNED
+            - REFERRAL_CREATED
+            - REFERRAL_UPDATED
+            - REFERRAL_DELETED
+            - REFERRAL_VIEWED
+            - REFERRAL_FETCHED
+            - REFERRAL_SENT
+            - REFERRAL_RECEIVED
+            - REFERRAL_APPROVED
+            - REFERRAL_REJECTED
+            - REFERRAL_CANCELLED
+            - PROCEDURE_CODE_CREATED
+            - PROCEDURE_CODE_UPDATED
+            - PROCEDURE_CODE_DELETED
+            - PROCEDURE_CODE_VIEWED
+            - PROCEDURE_CODE_FETCHED
+            - PROCEDURE_CODE_ENABLED
+            - PROCEDURE_CODE_DISABLED
+            - PROCEDURE_CODE_ARCHIVED
+            - PROCEDURE_CODE_UNARCHIVED
+            - INVALID_CREDENTIALS
+            - LOGIN_FAILED
+            - INVALID_REFRESH_TOKEN
+            - LOGOUT_RESPONSE
+            - LOGOUT_FAILED
+            - SET_PASSWORD_RESPONSE
+            - INVALID_PASSWORD_LINK
+            - INVALID_PASSWORD
+            - RESET_PASSWORD_FAILED
+            - CHANGE_PASSWORD_RESPONSE
+            - VERIFY_PASSWORD_LINK_RESPONSE
+            - FORGOT_PASSWORD_RESPONSE
+            - RESEND_INVITE_EMAIL_RESPONSE
+            - USER_CREATED
+            - USER_FETCHED
+            - USER_NOT_FOUND
+            - USER_EMAIL_NOT_FOUND
+            - UPDATE_USER_PROFILE_RESPONSE
+            - USER_ENABLED
+            - USER_DISABLED
+            - DUPLICATE_EMAIL_ERROR
+            - CHANGE_AVATAR_RESPONSE
+            - USER_EMAIL_REQUIRED
+            - USER_EMAIL_UPDATE_ERROR
+            - INVALID_USER_ROLE
+            - USER_EMAIL_VERIFIED
+            - SIGNED_UP
+            - USER_INACTIVE
+            - EMPTY_EMAIL
+            - MAIL_SENT_SUCCESSFULLY
+            - PROVIDER_GROUP_CREATED
+            - PROVIDER_GROUP_UPDATED
+            - FAILED_UPDATE_PROVIDER_GROUP
+            - PROVIDER_GROUP_ENABLED
+            - PROVIDER_GROUP_DISABLED
+            - PROVIDER_GROUP_ARCHIVED
+            - PROVIDER_GROUP_UNARCHIVED
+            - LOCATION_CREATED
+            - LOCATION_UPDATED
+            - LOCATION_DELETED
+            - LOCATION_FETCHED
+            - LOCATION_NOT_FOUND
+            - LOCATION_ENABLED
+            - LOCATION_DISABLED
+            - LOCATION_ARCHIVED
+            - LOCATION_UNARCHIVED
+            - DEPARTMENT_CREATED
+            - DEPARTMENT_UPDATED
+            - DEPARTMENT_ENABLED
+            - DEPARTMENT_DISABLED
+            - DEPARTMENT_ARCHIVED
+            - DEPARTMENT_UNARCHIVED
+            - PROVIDER_CREATED
+            - PROVIDER_UPDATED
+            - PROVIDER_ENABLED
+            - PROVIDER_DISABLED
+            - PROVIDER_ARCHIVED
+            - PROVIDER_FETCHED
+            - PROVIDER_STATUS_CHANGED
+            - PROVIDER_UNARCHIVED
+            - NPI_ALREADY_EXIST
+            - PATIENT_CREATED
+            - PATIENT_UPDATE
+            - PATIENT_REGISTER
+            - PATIENT_DELETED
+            - PATIENT_FOUND
+            - PATIENT_PLAN_DETAIL
+            - PATIENT_MEMBERSHIP
+            - PATIENT_STATUS_UPDATED
+            - PATIENT_ARCHIVE_STATUS_UPDATED
+            - PATIENT_UNARCHIVE_STATUS_UPDATED
+            - PATIENT_ENABLE_DISABLE_RESPONSE
+            - FAILED_PATIENT_UPDATE
+            - PATIENT_NOT_FOUND
+            - USER_MRN_UPDATE_ERROR
+            - PATIENT_DATA_FETCHED
+            - PATIENT_DOCUMENT_REMOVED
+            - UPLOAD_DOC_INVALID_ERROR
+            - FAILED_PATIENT_STATUS_UPDATE
+            - PATIENT_ARCHIVE
+            - FAILED_PATIENT_ARCHIVE
+            - INVALID_BIRTHDATE
+            - FAILED_UPDATE_PATIENT_INSURANCE
+            - ADDED_TO_WAITING_LIST
+            - PATIENT_DRUGINTOLERANCE_CREATED
+            - PATIENT_DRUGINTOLERANCE_FETCHED
+            - PATIENT_DRUGINTOLERANCE_UPDATED
+            - PATIENT_DRUGINTOLERANCE_DELETED
+            - ICD_CODE_CREATED
+            - ICD_CODE_FETCHED
+            - ICD_CODE_DISABLED
+            - PHARMACY_FETCHED
+            - PHARMACY_CREATED
+            - PHARMACY_UPDATED
+            - PHARMACY_DISABLED
+            - TENANT_CONFIGURATION_CREATED
+            - TENANT_CONFIGURATION_UPDATED
+            - FEE_AMOUNT_ADDED
+            - FEE_AMOUNT_UPDATED
+            - FEE_AMOUNT_STATUS_CHANGED
+            - FEE_AMOUNT_ALREADY_EXISTS
+            - FEE_AMOUNT_NOT_FOUND
+            - FEE_DELETED
+            - INVALID_MEDICAL_CODE
+            - PATIENT_ADDED
+            - PATIENT_ARCHIVED
+            - PATIENT_UNARCHIVED
+            - PATIENT_ENABLED
+            - PATIENT_DISABLED
+            - LEAD_ADDED
+            - LEAD_UPDATED
+            - LEAD_DELETED
+            - LEAD_FETCHED
+            - PLAN_ADDED
+            - PLAN_UPDATED
+            - PLAN_DELETED
+            - PLAN_FETCHED
+            - INSURANCEPAYER_NOT_FOUND
+            - INSURANCE_POLICY_NOT_FOUND
+            - TOO_MANY_INSURANCES
+            - INSURANCE_NOT_FOUND
+            - SECONDARY_INSURANCE_NOT_FOUND
+            - INSURANCETYPE_UPDATED
+            - CANNOT_UPDATE_INSURANCETYPE
+            - PATIENT_INSURANCE_UPDATE
+            - SECONDARY_INSURANCE_REMOVED
+            - DUPLICATE_INSURANCE_ERROR
+            - ELIGIBILITY_NOT_ALLOWED
+            - INSURANCE_ADDED
+            - INSURANCE_UPDATED
+            - INSURANCE_DELETED
+            - INSURANCE_FETCHED
+            - INTAKE_FORM_ADDED
+            - INTAKE_FORM_UPDATED
+            - PATIENT_DOCUMENT_UPLOADED
+            - REASON_IS_MANDATORY
+            - CHARGEABLE_IS_MANDATORY
+            - INTAKE_NEEDED
+            - CONSENT_FORM_FOUND
+            - ADDED_AVAILABILITY
+            - CONSULT_TIME_CONFLICT
+            - BOOKED_APPOINTMENT_SLOT
+            - AVAILABILITY_NOT_FOUND
+            - DAY_SLOT_NOT_FOUND
+            - SLOT_NOT_FOUND
+            - INVALID_TIME_DURATION
+            - PAST_START_TIME
+            - SLOT_ALREADY_BOOKED
+            - APPOINTMENT_CREATED
+            - APPOINTMENT_DATA_FETCHED
+            - APPOINTMENT_NOT_FOUND
+            - APPOINTMENT_UPDATED
+            - APPOINTMENT_CONFIRMED
+            - NEW_APPT_ALREADY_EXIST
+            - NEW_APPT_NOT_EXIST
+            - EXISTING_APPOINTMENT_NOT_FOUND
+            - RESCHEDULE_NOT_ALLOWED
+            - APPOINTMENT_RESCHEDULED
+            - APPOINTMENT_RESCHEDULED_WITH_CHARGE
+            - CHECKED_IN_NOT_ENABLED
+            - FOLLOW_UP_APPT_ERROR
+            - APPT_NOT_COMPLETE_ERROR
+            - EXISTING_APPT_STATUS_ERROR
+            - APPOINTMENT_FEE_SET
+            - APPOINTMENT_FEE_ALREADY_PAID
+            - NO_SHOW_NOT_ALLOWED
+            - BILL_AMOUNT
+            - SEND_MESSAGE_RESPONSE
+            - EMAIL_SUBJECT_MANDATORY
+            - PATIENT_PHONE_NOT_PRESENT
+            - ENCOUNTER_ALREADY_EXIST
+            - ENCOUNTER_ARCHIVED
+            - ENCOUNTER_UPDATED
+            - PATIENT_SCREENER_ADDED
+            - PATIENTSCREENER_NOT_FOUND
+            - PATIENT_SCORE_ADDED
+            - PATIENT_SCREENER_ANSWER_UPDATED
+            - INVALID_SCREENER_TYPE
+            - INVALID_ANSWER_OPTION
+            - INCOMPLETE_SCREENER_ANSWERS
+            - PATIENT_SCREENER_SCORE_UPDATED
+            - PATIENT_SCREENER_DATA_FETCHED
+            - PAYMENT_CARD_ADDED
+            - PAYMENT_CARD_ALREADY_EXISTS
+            - PAYMENT_CHARGED
+            - FINE_CHARGED
+            - PAYMENT_CARD_NOT_FOUND
+            - PAYMENT_ALREADY_DONE
+            - PAYMENT_CARD_NOT_EXISTS
+            - PAYMENT_AMOUNT_NOT_SET
+            - PAYMENT_BILL_STATUS_ERROR
+            - INVALID_CARD_EXPIRATION
+            - NO_NOTIFICATIONS
+            - NOTIFICATION_MARKED_AS_SEEN
+            - NOTIFICATIONS_COUNT
+            - PATIENT_CONSENT_FORMS_ADDED
+            - TEXTMACRO_SHORTCUT_EXISTS
+            - TEXTMACRO_ADDED
+            - TEXTMACRO_DATA_FETCHED
+            - TEXTMACRO_UPDATED
+            - FAILED_UPDATE_TEXT_MACRO
+            - FAILED_TEXTMACRO_ARCHIVE
+            - TEXTMACRO_ARCHIVE
+            - TASK_ADDED
+            - TASK_DATA_FETCHED
+            - TASK_UPDATED
+            - TasK_ENABLED
+            - TasK_DISABLED
+            - TasK_ARCHIVED
+            - TasK_UNARCHIVED
+            - TASK_ASSIGNED
+            - INVALID_TASK_STATUS
+            - INVALID_DUEDATE
+            - FINE_CHARGED_APPOINTMENT
+            - APPOINTMENT_FINE
+            - CANNOT_CHARGE_FINE
+            - PAYMENT_SUCCESSFUL
+            - VITAL_ADDED
+            - VITAL_UPDATED
+            - VITAL_DATA_FETCHED
+            - VITAL_NOT_FOUND
+            - FAILED_VITAL_UPDATED
+            - EMITTED_SUCCESSFULLY
+            - WEBHOOK_SUCCESSFUL
+            - BILL_UPDATED
+            - CLAIM_ADDED
+            - BOOK_APPOINTMENT_ERROR
+            - CANCEL_APPOINTMENT_ERROR
+            - NOT_IMPLEMENTED
+            - COMMENT_ADDED_SUCCESSFULLY
+            - COMMENT_UPDATED_SUCCESSFULLY
+            - COMMENT_DELETED_SUCCESSFULLY
+            - MEDICAL_CODE_ADDED_SUCCESSFULLY
+            - MEDICAL_CODE_UPDATED_SUCCESSFULLY
+            - PROVIDER_REVIEW_ADDED_SUCCESSFULLY
+            - PROVIDER_REVIEW_STATUS_UPDATED_SUCCESSFULLY
+            - CHECK_IN_STATUS
+            - REFILL_RX_ADDED
+            - REFILL_RX_UPDATED
+            - ROI_ADDED
+            - ROI_UPDATED
+            - ROI_STATUS_UPDATED
+            - ROI_NOT_FOUND
+            - CONSENT_FORM_TEMPLATE_ADDED
+            - CONSENT_FORM_TEMPLATE_UPDATED
+            - CONSENT_FORM_TEMPLATE_STATUS
+            - INTERNAL_SERVER_ERROR
+            - FILE_UPLOADED
+            - EMPTY_FILE
+            - MEDICAL_CODES_CREATED
+            - MEDICAL_CODES_UPDATED
+            - MEDICAL_CODE_ENABLED
+            - MEDICAL_CODE_DISABLED
+            - MEDICAL_CODE_ARCHIVED
+            - MEDICAL_CODE_UNARCHIVED
+            - PATIENT_DIAGNOSIS_CREATED
+            - PATIENT_DIAGNOSIS_UPDATED
+            - PATIENT_DIAGNOSIS_ENABLED
+            - PATIENT_DIAGNOSIS_DISABLED
+            - PATIENT_DIAGNOSIS_ARCHIVED
+            - PATIENT_DIAGNOSIS_UNARCHIVED
+            - PATIENT_DIAGNOSIS_FETCHED
+            - PATIENT_ALLERGY_CREATED
+            - PATIENT_ALLERGY_FETCHED
+            - PATIENT_ALLERGY_UPDATED
+            - PATIENT_ALLERGY_ENABLED
+            - PATIENT_ALLERGY_DISABLED
+            - PATIENT_ALLERGY_ARCHIVED
+            - PATIENT_ALLERGY_UNARCHIVED
+            - PATIENT_ALLERGY_DELETED
+            - PATIENT_VACCINE_CREATED
+            - PATIENT_VACCINE_UPDATED
+            - PATIENT_VACCINE_ENABLED
+            - PATIENT_VACCINE_DISABLED
+            - PATIENT_VACCINE_ARCHIVED
+            - PATIENT_VACCINE_UNARCHIVED
+            - PATIENT_VACCINE_DELETED
+            - PATIENT_VACCINE_FETCHED
+            - VACCINE_CREATED
+            - VACCINE_UPDATED
+            - VACCINE_FETCHED
+            - VACCINE_DELETED
+            - PATIENT_VITAL_CREATED
+            - PATIENT_VITAL_UPDATED
+            - STICKY_NOTE_CREATED
+            - STICKY_NOTE_UPDATED
+            - STICKY_NOTE_ENABLED
+            - STICKY_NOTE_DISABLED
+            - STICKY_NOTE_ARCHIVED
+            - STICKY_NOTE_UNARCHIVED
+            - PATIENT_MEDICATION_CREATED
+            - PATIENT_MEDICATION_FETCHED
+            - PATIENT_MEDICATION_DELETED
+            - PATIENT_MEDICATION_UPDATED
+            - PATIENT_MEDICATION_ENABLED
+            - PATIENT_MEDICATION_DISABLED
+            - PATIENT_MEDICATION_ARCHIVED
+            - PATIENT_MEDICATION_UNARCHIVED
+            - PATIENT_MEDICAL_HISTORY_CREATED
+            - PATIENT_MEDICAL_HISTORY_UPDATED
+            - PATIENT_MEDICAL_HISTORY_ENABLED
+            - PATIENT_MEDICAL_HISTORY_DISABLED
+            - PATIENT_MEDICAL_HISTORY_ARCHIVED
+            - PATIENT_MEDICAL_HISTORY_UNARCHIVED
+            - PATIENT_MEDICAL_HISTORY_FETCHED
+            - PATIENT_SURGICAL_HISTORY_CREATED
+            - PATIENT_SURGICAL_HISTORY_UPDATED
+            - PATIENT_SURGICAL_HISTORY_ENABLED
+            - PATIENT_SURGICAL_HISTORY_DISABLED
+            - PATIENT_SURGICAL_HISTORY_ARCHIVED
+            - PATIENT_SURGICAL_HISTORY_UNARCHIVED
+            - PATIENT_SURGICAL_HISTORY_FETCHED
+            - PATIENT_FAMILY_HISTORY_CREATED
+            - PATIENT_FAMILY_HISTORY_UPDATED
+            - PATIENT_FAMILY_HISTORY_ENABLED
+            - PATIENT_FAMILY_HISTORY_DISABLED
+            - PATIENT_FAMILY_HISTORY_ARCHIVED
+            - PATIENT_FAMILY_HISTORY_UNARCHIVED
+            - PATIENT_FAMILY_HISTORY_FETCHED
+            - PATIENT_LINK_PHARMACY_CREATED
+            - PATIENT_LINK_PHARMACY_UPDATED
+            - PATIENT_SOCIAL_HISTORY_CREATED
+            - PATIENT_SOCIAL_HISTORY_UPDATED
+            - PATIENT_SOCIAL_HISTORY_ENABLED
+            - PATIENT_SOCIAL_HISTORY_DISABLED
+            - PATIENT_SOCIAL_HISTORY_ARCHIVED
+            - PATIENT_SOCIAL_HISTORY_UNARCHIVED
+            - DOCUMENT_CREATED
+            - DOCUMENT_UPDATED
+            - DOCUMENT_DELETED
+            - DOCUMENT_VIEWED
+            - DOCUMENT_FETCHED
+            - DOCUMENT_TYPE_CREATED
+            - DOCUMENT_TYPE_UPDATED
+            - DOCUMENT_TYPE_DELETED
+            - DOCUMENT_TYPE_VIEWED
+            - DOCUMENT_TYPE_FETCHED
+            - DOCUMENT_TYPE_ENABLED
+            - DOCUMENT_TYPE_DISABLED
+            - DOCUMENT_TYPE_ARCHIVED
+            - DOCUMENT_TYPE_UNARCHIVED
+            - DOCUMENT_TAG_CREATED
+            - DOCUMENT_TAG_UPDATED
+            - DOCUMENT_TAG_ENABLED
+            - DOCUMENT_TAG_DISABLED
+            - DOCUMENT_TAG_ARCHIVED
+            - DOCUMENT_TAG_UNARCHIVED
+            - IMAGING_ORDER_CREATED
+            - IMAGING_ORDER_UPDATED
+            - IMAGING_ORDER_DELETED
+            - IMAGING_ORDER_VIEWED
+            - IMAGING_ORDER_FETCHED
+            - IMAGING_ORDER_COMPLETED
+            - IMAGING_ORDER_CANCELLED
+            - IMAGING_ORDER_APPROVED
+            - IMAGING_ORDER_REJECTED
+            - IMAGING_ORDER_SCHEDULED
+            - IMAGING_RESULT_CREATED
+            - IMAGING_RESULT_UPDATED
+            - IMAGING_RESULT_DELETED
+            - IMAGING_RESULT_VIEWED
+            - IMAGING_RESULT_FETCHED
+            - IMAGING_RESULT_APPROVED
+            - IMAGING_RESULT_REJECTED
+            - IMAGING_RESULT_REVIEWED
+            - IMAGING_RESULT_ARCHIVED
+            - IMAGING_RESULT_UNARCHIVED
+            - PATIENT_LAB_ORDER_CREATED
+            - PATIENT_LAB_ORDER_UPDATED
+            - PATIENT_LAB_ORDER_NOT_FOUND
+            - PATIENT_LAB_ORDER_ENABLED
+            - PATIENT_LAB_ORDER_DISABLED
+            - PATIENT_LAB_ORDER_ARCHIVED
+            - PATIENT_LAB_ORDER_UNARCHIVED
+            - CLINICAL_NOTE_CREATED
+            - CLINICAL_NOTE_UPDATED
+            - CLINICAL_NOTE_NOT_FOUND
+            - CLINICAL_NOTE_ENABLED
+            - CLINICAL_NOTE_DISABLED
+            - CLINICAL_NOTE_ARCHIVED
+            - CLINICAL_NOTE_UNARCHIVED
+            - LOCATION_GROUP_ADDED
+            - LOCATION_GROUP_UPDATED
+            - LOCATION_GROUP_DELETED
+            - LOCATION_GROUP_FETCHED
+            - USER_DOCUMENT_UPLOAD
+            - ROLE_ADDED
+            - PRIVILEGE_NOT_FOUND
+            - ROLE_UPDATED
+            - ROLE_NOT_FOUND
+            - CUSTOM_FORM_CREATED
+            - CUSTOM_FORM_STATUS_UPDATED
+            - CUSTOM_FORM_UPDATED
+            - CUSTOM_FORM_ENABLED
+            - CUSTOM_FORM_DISABLED
+            - CUSTOM_FORM_ARCHIVED
+            - CUSTOM_FORM_UNARCHIVED
+            - CUSTOM_FORM_RESTORED
+            - CUSTOM_FORM_COPY
+            - CUSTOM_FORM_TEMPLATE_CREATED
+            - CUSTOM_FORM_TEMPLATE_STATUS_UPDATED
+            - CUSTOM_FORM_TEMPLATE_UPDATED
+            - CUSTOM_FORM_TEMPLATE_ENABLED
+            - CUSTOM_FORM_TEMPLATE_DISABLED
+            - CUSTOM_FORM_TEMPLATE_ARCHIVED
+            - CUSTOM_FORM_TEMPLATE_RESTORED
+            - MICROS_FORM_CREATED
+            - MICROS_FORM_UPDATED
+            - MICROS_FORM_STATUS_UPDATED
+            - MICROS_FORM_ARCHIVE_STATUS_UPDATED
+            - VISIT_NOTE_FORM_CREATED
+            - VISIT_NOTE_FORM_UPDATED
+            - VISIT_NOTE_FORM_STATUS_UPDATED
+            - VISIT_NOTE_FORM_ARCHIVE_STATUS_UPDATED
+            - REVIEW_OF_SYSTEM_FORM_CREATED
+            - REVIEW_OF_SYSTEM_FORM_UPDATED
+            - REVIEW_OF_SYSTEM_FORM_STATUS_UPDATED
+            - REVIEW_OF_SYSTEM_FORM_ARCHIVE_STATUS_UPDATED
+            - CUSTOM_QUESTIONNAIRE_FORM_CREATED
+            - CUSTOM_QUESTIONNAIRE_FORM_UPDATED
+            - CUSTOM_QUESTIONNAIRE_FORM_STATUS_UPDATED
+            - CUSTOM_QUESTIONNAIRE_FORM_ARCHIVE_STATUS_UPDATED
+            - CAREPLAN_FORM_CREATED
+            - CAREPLAN_FORM_UPDATED
+            - CAREPLAN_FORM_STATUS_UPDATED
+            - CAREPLAN_FORM_ARCHIVE_STATUS_UPDATED
+            - ANNOTABLE_IMAGE_FORM_CREATED
+            - ANNOTABLE_IMAGE_FORM_UPDATED
+            - ANNOTABLE_IMAGE_FORM_STATUS_UPDATED
+            - ANNOTABLE_IMAGE_FORM_ARCHIVE_STATUS_UPDATED
+            - ORDER_SET_FORM_CREATED
+            - ORDER_SET_FORM_UPDATED
+            - ORDER_SET_FORM_STATUS_UPDATED
+            - ORDER_SET_FORM_ARCHIVE_STATUS_UPDATED
+            - PHYSICAL_EXAM_FORM_CREATED
+            - PHYSICAL_EXAM_FORM_UPDATED
+            - PHYSICAL_EXAM_FORM_STATUS_UPDATED
+            - PHYSICAL_EXAM_FORM_ARCHIVE_STATUS_UPDATED
+            - CHECK_CONSULT_TIME
+            - PATIENT_FLAG_CREATED
+            - PATIENT_FLAG_FETCHED
+            - PATIENT_FLAG_UPDATED
+            - PATIENT_FLAG_DELETED
+            - ICD_CODE_ADDED
+            - CPT_CODE_ADDED
+            - HCPCS_CODE_ADDED
+            - LOINC_CODE_ADDED
+            - ICD_CODE_UPDATED
+            - CPT_CODE_UPDATED
+            - HCPCS_CODE_UPDATED
+            - LOINC_CODE_UPDATED
+            - INVOICE_SETTING_CREATED
+            - INVOICE_SETTING_UPDATED
+            - INVOICE_SETTING_FETCHED
+            - INVOICE_SETTING_DELETED
+            - STUDY_ORDER_FETCHED
+            - DOCUMENT_UPLOADED
+            - IMAGE_UPLOADED
+            - AUDIT_HISTORY_FETCHED
+            - PAYMENT_TRANSACTION_CREATED
+            - PAYMENT_TRANSACTION_UPDATED
+            - PAYMENT_TRANSACTION_DELETED
+            - PAYMENT_TRANSACTION_FETCHED
+        message:
+          type: string
+        data:
+          type: object
+        errors:
+          type: object
+          additionalProperties:
+            type: string
+        path:
+          type: string
+        requestId:
+          type: string
+        version:
+          type: string
+    AddressDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        line1:
+          type: string
+        line2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        zipcode:
+          pattern: ^(?:\d{5}|\d{9})$
+          type: string
+    ProviderRequestDto:
+      required:
+        - addressDto
+        - bio
+        - email
+        - firstName
+        - lastName
+        - npi
+        - phoneNumber
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: uuid
+        firstName:
+          type: string
+        lastName:
+          type: string
+        phoneNumber:
+          pattern: ^\+?\d{10,13}$
+          type: string
+        phoneType:
+          type: string
+          enum:
+            - MOBILE
+            - LANDLINE
+        npi:
+          type: string
+        notHaveNpi:
+          type: boolean
+        longitude:
+          type: string
+        latitude:
+          type: string
+        gender:
+          type: string
+          enum:
+            - MALE
+            - FEMALE
+            - OTHER
+        status:
+          type: boolean
+        bio:
+          type: string
+        distanceInMiles:
+          type: string
+        email:
+          pattern: ^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$
+          type: string
+        avatar:
+          type: string
+        treatAgeFrom:
+          type: integer
+          format: int32
+        treatAgeTo:
+          type: integer
+          format: int32
+        addressDto:
+          $ref: "#/components/schemas/AddressDto"
+        acceptingEnrollmentFrom:
+          type: string
+          enum:
+            - RETAIL
+            - EMPLOYER
+        specialitiesUuid:
+          type: array
+          items:
+            type: string
+            format: uuid
+        specialityList:
+          type: array
+          items:
+            $ref: "#/components/schemas/SpecialityDto"
+        locationUuids:
+          type: array
+          items:
+            type: string
+            format: uuid
+        education:
+          type: array
+          items:
+            type: string
+        locationNames:
+          type: array
+          items:
+            type: string
+    SpecialityDto:
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: uuid
+        name:
+          type: string
+        active:
+          type: boolean
+    PlanDto:
+      type: object
+      properties:
+        planUuid:
+          type: string
+          format: uuid
+        planName:
+          type: string
+        planType:
+          type: string
+          enum:
+            - RETAIL
+            - EMPLOYER
+        billingDate:
+          type: string
+          format: date
+        copied:
+          type: boolean
+        copiedFromPlanDetailUuid:
+          type: string
+          format: uuid
+    AdvancePaymentOptions:
+      type: object
+      properties:
+        advancePaymentOptionUuid:
+          type: string
+          format: uuid
+        billingAtEndOfBillingCycle:
+          type: boolean
+        defaultBillingPeriod:
+          type: string
+          enum:
+            - ANNUAL
+            - MONTH
+            - QUARTERLY
+            - SEMI_ANNUALLY
+        minimumInitialEnrollmentPeriod:
+          type: boolean
+        numberOfMonths:
+          type: integer
+          format: int32
+        invoiceDetailMemberShipName:
+          type: string
+        description:
+          type: string
+        monthly:
+          type: boolean
+        quarterly:
+          type: boolean
+        semiAnnually:
+          type: boolean
+        annually:
+          type: boolean
+        monthlyDefaultDiscountOrSurcharge:
+          type: number
+          format: double
+        quarterlyDefaultDiscountOrSurcharge:
+          type: number
+          format: double
+        semiAnnuallyDefaultDiscountOrSurcharge:
+          type: number
+          format: double
+        annuallyDefaultDiscountOrSurcharge:
+          type: number
+          format: double
+    AdvancePricingRuleDto:
+      type: object
+      properties:
+        advancePricingRuleUuid:
+          type: string
+          format: uuid
+        contactExpiration:
+          type: boolean
+        sendRenewalBehaviour:
+          type: boolean
+        contractDuration:
+          type: integer
+          format: int32
+        renewalEmailNotificationTime:
+          type: integer
+          format: int32
+        contractEndBehaviour:
+          type: string
+          enum:
+            - TERMINATE
+            - AUTO_RENEW
+        planUuid:
+          type: string
+          format: uuid
+        planName:
+          type: string
+        effectiveTime:
+          type: string
+          enum:
+            - PERIODS_OF_MONTHS
+            - DATE
+        effectiveDate:
+          type: string
+          format: date
+        specialRateList:
+          type: array
+          items:
+            $ref: "#/components/schemas/SpecialRateDto"
+    BasicPlanDetails:
+      type: object
+      properties:
+        planUuid:
+          type: string
+          format: uuid
+        planName:
+          type: string
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+        planStatus:
+          type: string
+          enum:
+            - ACTIVE
+            - UPCOMING
+            - EXPIRED
+        planType:
+          type: string
+          enum:
+            - RETAIL
+            - EMPLOYER
+    IndividualMemberShipRateDto:
+      type: object
+      properties:
+        individualMemberShipRateUuid:
+          type: string
+          format: uuid
+        specialRateAmountUuid:
+          type: string
+          format: uuid
+        defaultBillingPeriod:
+          type: string
+          enum:
+            - ANNUAL
+            - MONTH
+            - QUARTERLY
+            - SEMI_ANNUALLY
+        amount:
+          type: number
+          format: double
+    IndividualMembershipFeeDto:
+      type: object
+      properties:
+        individualMembershipFeeUuid:
+          type: string
+          format: uuid
+        fromAge:
+          type: integer
+          format: int32
+        relationShip:
+          type: string
+          enum:
+            - ALL
+            - SELF
+            - SPOUSE
+            - SIBLING
+            - MOTHER
+            - FATHER
+            - GUARDIAN
+            - PARENT
+            - CHILDREN
+            - GRANDPARENT
+            - GRANDCHILDREN
+            - FRIEND
+            - PARTNER
+            - OTHER
+        toAge:
+          type: integer
+          format: int32
+        rates:
+          type: array
+          items:
+            $ref: "#/components/schemas/IndividualMemberShipRateDto"
+    PlanDetailsDto:
+      type: object
+      properties:
+        planUuid:
+          type: string
+          format: uuid
+        basicPlanDetails:
+          $ref: "#/components/schemas/BasicPlanDetails"
+        registrationFee:
+          $ref: "#/components/schemas/RegistrationFeeDto"
+        advancePaymentOptions:
+          $ref: "#/components/schemas/AdvancePaymentOptions"
+        individualMembershipFee:
+          type: array
+          items:
+            $ref: "#/components/schemas/IndividualMembershipFeeDto"
+        advancePricingRuleDto:
+          $ref: "#/components/schemas/AdvancePricingRuleDto"
+    RegistrationFeeDto:
+      type: object
+      properties:
+        registrationFeeUuid:
+          type: string
+          format: uuid
+        individualMembershipFee:
+          type: boolean
+        amount:
+          type: number
+          format: double
+    SpecialRateDto:
+      type: object
+      properties:
+        specialRateUuid:
+          type: string
+          format: uuid
+        specialRateName:
+          type: string
+        relationShip:
+          type: string
+          enum:
+            - ALL
+            - SELF
+            - SPOUSE
+            - SIBLING
+            - MOTHER
+            - FATHER
+            - GUARDIAN
+            - PARENT
+            - CHILDREN
+            - GRANDPARENT
+            - GRANDCHILDREN
+            - FRIEND
+            - PARTNER
+            - OTHER
+        specialRates:
+          type: array
+          items:
+            $ref: "#/components/schemas/IndividualMemberShipRateDto"
+    EmergencyContactDto:
+      type: object
+      properties:
+        emergencyContactUuid:
+          type: string
+          format: uuid
+        firstName:
+          type: string
+        lastName:
+          type: string
+        phoneNumber:
+          type: string
+        phoneType:
+          type: string
+          enum:
+            - MOBILE
+            - LANDLINE
+        email:
+          type: string
+        relationShip:
+          type: string
+          enum:
+            - ALL
+            - SELF
+            - SPOUSE
+            - SIBLING
+            - MOTHER
+            - FATHER
+            - GUARDIAN
+            - PARENT
+            - CHILDREN
+            - GRANDPARENT
+            - GRANDCHILDREN
+            - FRIEND
+            - PARTNER
+            - OTHER
+    PatientRequestDto:
+      required:
+        - dateOfBirth
+        - firstName
+        - lastName
+        - phoneNumber
+        - preferredLocation
+        - sex
+      type: object
+      properties:
+        patientUuid:
+          type: string
+          format: uuid
+        leadUuid:
+          type: string
+          format: uuid
+        planUuid:
+          type: string
+          format: uuid
+        primaryProviderUuid:
+          type: string
+          format: uuid
+        employerUuid:
+          type: string
+          format: uuid
+        firstName:
+          type: string
+        lastName:
+          type: string
+        dateOfBirth:
+          type: string
+          format: date-time
+        sex:
+          type: string
+          enum:
+            - MALE
+            - FEMALE
+            - OTHER
+        preferredLocation:
+          type: string
+          enum:
+            - ALABAMA
+            - ALASKA
+            - ARIZONA
+            - ARKANSAS
+            - CALIFORNIA
+            - COLORADO
+            - CONNECTICUT
+            - DELAWARE
+            - FLORIDA
+            - GEORGIA
+            - HAWAII
+            - IDAHO
+            - ILLINOIS
+            - INDIANA
+            - IOWA
+            - KANSAS
+            - KENTUCKY
+            - LOUISIANA
+            - MAINE
+            - MARYLAND
+            - MASSACHUSETTS
+            - MICHIGAN
+            - MINNESOTA
+            - MISSISSIPPI
+            - MISSOURI
+            - MONTANA
+            - NEBRASKA
+            - NEVADA
+            - NEW_HAMPSHIRE
+            - NEW_JERSEY
+            - NEW_MEXICO
+            - NEW_YORK
+            - NORTH_CAROLINA
+            - NORTH_DAKOTA
+            - OHIO
+            - OKLAHOMA
+            - OREGON
+            - PENNSYLVANIA
+            - RHODE_ISLAND
+            - SOUTH_CAROLINA
+            - SOUTH_DAKOTA
+            - TENNESSEE
+            - TEXAS
+            - UTAH
+            - VERMONT
+            - VIRGINIA
+            - WASHINGTON
+            - WEST_VIRGINIA
+            - WISCONSIN
+            - WYOMING
+        email:
+          type: string
+        avatar:
+          type: string
+        latitude:
+          type: string
+        longitude:
+          type: string
+        haveEmail:
+          type: boolean
+        phoneNumber:
+          type: string
+        phoneType:
+          type: string
+          enum:
+            - MOBILE
+            - LANDLINE
+        planStartDate:
+          type: string
+          format: date
+        planRenewalDate:
+          type: string
+          format: date
+        relationshipToYou:
+          type: string
+          enum:
+            - ALL
+            - SELF
+            - SPOUSE
+            - SIBLING
+            - MOTHER
+            - FATHER
+            - GUARDIAN
+            - PARENT
+            - CHILDREN
+            - GRANDPARENT
+            - GRANDCHILDREN
+            - FRIEND
+            - PARTNER
+            - OTHER
+        relationShipName:
+          type: string
+        dependent:
+          type: boolean
+        addressDto:
+          $ref: "#/components/schemas/AddressDto"
+        emergencyContactDto:
+          $ref: "#/components/schemas/EmergencyContactDto"
+    CheckMyPlanDto:
+      type: object
+      properties:
+        planUuid:
+          type: string
+          format: uuid
+        primaryLeadUuid:
+          type: string
+          format: uuid
+        amount:
+          type: number
+          format: double
+        defaultBillingPeriod:
+          type: string
+          enum:
+            - ANNUAL
+            - MONTH
+            - QUARTERLY
+            - SEMI_ANNUALLY
+        startDate:
+          type: string
+          format: date
+        renewalDate:
+          type: string
+          format: date
+        patientPlans:
+          type: array
+          items:
+            $ref: "#/components/schemas/PatientPlanDto"
+        individualPatientPlans:
+          $ref: "#/components/schemas/PatientPlanDto"
+        totalAmount:
+          type: number
+          format: double
+    LeadResponseDto:
+      type: object
+      properties:
+        leadUuid:
+          type: string
+          format: uuid
+        email:
+          type: string
+        firstName:
+          type: string
+        preferredLocation:
+          type: string
+          enum:
+            - ALABAMA
+            - ALASKA
+            - ARIZONA
+            - ARKANSAS
+            - CALIFORNIA
+            - COLORADO
+            - CONNECTICUT
+            - DELAWARE
+            - FLORIDA
+            - GEORGIA
+            - HAWAII
+            - IDAHO
+            - ILLINOIS
+            - INDIANA
+            - IOWA
+            - KANSAS
+            - KENTUCKY
+            - LOUISIANA
+            - MAINE
+            - MARYLAND
+            - MASSACHUSETTS
+            - MICHIGAN
+            - MINNESOTA
+            - MISSISSIPPI
+            - MISSOURI
+            - MONTANA
+            - NEBRASKA
+            - NEVADA
+            - NEW_HAMPSHIRE
+            - NEW_JERSEY
+            - NEW_MEXICO
+            - NEW_YORK
+            - NORTH_CAROLINA
+            - NORTH_DAKOTA
+            - OHIO
+            - OKLAHOMA
+            - OREGON
+            - PENNSYLVANIA
+            - RHODE_ISLAND
+            - SOUTH_CAROLINA
+            - SOUTH_DAKOTA
+            - TENNESSEE
+            - TEXAS
+            - UTAH
+            - VERMONT
+            - VIRGINIA
+            - WASHINGTON
+            - WEST_VIRGINIA
+            - WISCONSIN
+            - WYOMING
+        lastName:
+          type: string
+        phoneNumber:
+          type: string
+        sex:
+          type: string
+          enum:
+            - MALE
+            - FEMALE
+            - OTHER
+        phoneType:
+          type: string
+          enum:
+            - MOBILE
+            - LANDLINE
+        birthDate:
+          type: string
+          format: date-time
+        haveEmail:
+          type: boolean
+        archive:
+          type: boolean
+        relationshipToYou:
+          type: string
+          enum:
+            - ALL
+            - SELF
+            - SPOUSE
+            - SIBLING
+            - MOTHER
+            - FATHER
+            - GUARDIAN
+            - PARENT
+            - CHILDREN
+            - GRANDPARENT
+            - GRANDCHILDREN
+            - FRIEND
+            - PARTNER
+            - OTHER
+        relationshipName:
+          type: string
+        dependent:
+          type: boolean
+        checkMyPlanDto:
+          $ref: "#/components/schemas/CheckMyPlanDto"
+    PatientPlanDto:
+      type: object
+      properties:
+        patientUuid:
+          type: string
+          format: uuid
+        leadUuid:
+          type: string
+          format: uuid
+        planAmount:
+          type: number
+          format: double
+        relationShip:
+          type: string
+          enum:
+            - ALL
+            - SELF
+            - SPOUSE
+            - SIBLING
+            - MOTHER
+            - FATHER
+            - GUARDIAN
+            - PARENT
+            - CHILDREN
+            - GRANDPARENT
+            - GRANDCHILDREN
+            - FRIEND
+            - PARTNER
+            - OTHER
+        relationShipName:
+          type: string
+        patientFullName:
+          type: string
+    User:
+      required:
+        - firstName
+        - lastName
+        - phone
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        uuid:
+          type: string
+          format: uuid
+        email:
+          maxLength: 64
+          minLength: 5
+          type: string
+        firstName:
+          maxLength: 32
+          minLength: 2
+          type: string
+        lastName:
+          maxLength: 32
+          minLength: 2
+          type: string
+        phone:
+          type: string
+        sex:
+          type: string
+          enum:
+            - MALE
+            - FEMALE
+            - OTHER
+        phoneType:
+          type: string
+          enum:
+            - MOBILE
+            - LANDLINE
+        avatar:
+          type: string
+        roleType:
+          type: string
+          enum:
+            - ADMIN
+            - USER
+            - EHR
+            - EMPLOYER
+            - PATIENT
+            - AGENT
+        role:
+          type: string
+        lastLogin:
+          type: string
+          format: date-time
+          readOnly: true
+        birthDate:
+          type: string
+          format: date-time
+        active:
+          type: boolean
+        haveEmail:
+          type: boolean
+        emailVerified:
+          type: boolean
+          readOnly: true
+        phoneVerified:
+          type: boolean
+          readOnly: true
+        archive:
+          type: boolean
+    VaccineDto:
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: uuid
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+            - ADULT
+            - CHILD
+    ReferralRequest:
+      required:
+        - contactDirectoryUuid
+        - patientUuid
+        - stat
+      type: object
+      properties:
+        patientUuid:
+          type: string
+          format: uuid
+        nurseProviderUuid:
+          type: string
+          format: uuid
+        contactDirectoryUuid:
+          type: string
+          format: uuid
+        icdCodeIdSet:
+          uniqueItems: true
+          type: array
+          items:
+            type: integer
+            format: int64
+        procedureCodeIdSet:
+          uniqueItems: true
+          type: array
+          items:
+            type: integer
+            format: int64
+        chartItem:
+          type: string
+        referralNote:
+          type: string
+        providerName:
+          type: string
+        fileKey:
+          type: string
+        fileType:
+          type: string
+        stat:
+          type: boolean
+    PharmacyDto:
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: uuid
+        email:
+          type: string
+        pharmacyType:
+          type: string
+          enum:
+            - INTERNAL
+            - EXTERNAL
+        name:
+          type: string
+        phone:
+          type: string
+        fax:
+          type: string
+        addressDto:
+          $ref: "#/components/schemas/AddressDto"
+        addressUuid:
+          type: string
+          format: uuid
+    LocalTime:
+      type: object
+      properties:
+        hour:
+          type: integer
+          format: int32
+        minute:
+          type: integer
+          format: int32
+        second:
+          type: integer
+          format: int32
+        nano:
+          type: integer
+          format: int32
+    PatientVaccinationDto:
+      required:
+        - patientUuid
+        - vaccineUuid
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: uuid
+        status:
+          type: string
+          enum:
+            - ADMINISTERED
+            - HISTORICAL
+            - DECLINED
+            - PATIENT_HAS_IMMUNITY
+            - PATIENT_HAS_DISEASE
+            - IMMUNITY_BY_TIER
+        age:
+          type: integer
+          format: int32
+        doseNumber:
+          type: integer
+          format: int64
+        vaccineDto:
+          $ref: "#/components/schemas/VaccineDto"
+        createdDate:
+          type: string
+          format: date
+        date:
+          type: string
+          format: date
+        time:
+          $ref: "#/components/schemas/LocalTime"
+        reasonRefused:
+          type: string
+        note:
+          type: string
+        patientUuid:
+          type: string
+          format: uuid
+        vaccineUuid:
+          type: string
+          format: uuid
+        providerUuid:
+          type: string
+          format: uuid
+    PatientFlagDto:
+      required:
+        - flagName
+        - patientUuid
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: uuid
+        patientUuid:
+          type: string
+          format: uuid
+        flagName:
+          type: string
+    PastSurgicalHistoryDto:
+      required:
+        - surgeryName
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: uuid
+        surgeryName:
+          pattern: ^[a-zA-Z0-9\s]+$
+          type: string
+        surgeryDate:
+          type: string
+          format: date
+        recordedDate:
+          type: string
+          format: date
+        note:
+          type: string
+        patientUuid:
+          type: string
+          format: uuid
+    PastMedicalHistoryDto:
+      required:
+        - conditionName
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: uuid
+        conditionName:
+          pattern: ^[a-zA-Z0-9\s]+$
+          type: string
+        onsetDate:
+          type: string
+          format: date
+        recordedDate:
+          type: string
+          format: date
+        note:
+          type: string
+        patientUuid:
+          type: string
+          format: uuid
+    NoteRequest:
+      required:
+        - documentNote
+        - note
+        - patientUuid
+      type: object
+      properties:
+        patientUuid:
+          type: string
+          format: uuid
+        note:
+          type: string
+        documentNote:
+          type: string
+          enum:
+            - INTERNAL_NOTE
+            - EXTERNAL_NOTE
+    MedicationRequest:
+      required:
+        - medicineName
+        - patientUuid
+        - permanent
+      type: object
+      properties:
+        patientUuid:
+          type: string
+          format: uuid
+        medicineName:
+          type: string
+        sig:
+          type: string
+        quantity:
+          type: integer
+          format: int64
+        refill:
+          type: integer
+          format: int64
+        permanent:
+          type: boolean
+        durationValue:
+          type: integer
+          format: int64
+        durationUnit:
+          type: string
+          enum:
+            - DAYS
+            - WEEKS
+            - MONTHS
+            - YEARS
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+        icdCodeIdSet:
+          uniqueItems: true
+          type: array
+          items:
+            type: integer
+            format: int64
+        pharmacyNote:
+          type: string
+    LocationRequestDto:
+      required:
+        - locationGroupUuid
+        - name
+        - phoneNumber
+        - phoneType
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: uuid
+        name:
+          type: string
+        phoneType:
+          type: string
+          enum:
+            - MOBILE
+            - LANDLINE
+        phoneNumber:
+          pattern: ^\+?\d{10,13}$
+          type: string
+        addressDto:
+          $ref: "#/components/schemas/AddressDto"
+        locationGroupUuid:
+          type: string
+          format: uuid
+        locationGroupName:
+          type: string
+        onlineSignUp:
+          type: boolean
+        active:
+          type: boolean
+    LocationGroupRequest:
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: uuid
+        name:
+          type: string
+        description:
+          type: string
+        state:
+          type: string
+    InvoiceRequest:
+      type: object
+      properties:
+        patientUuid:
+          type: string
+          format: uuid
+        invoiceDate:
+          type: string
+          format: date
+        invoiceChargeType:
+          type: string
+          enum:
+            - MEMBERSHIP_CHARGE
+            - PROCEDURE_CHARGE
+            - MEDICATION_CHARGE
+            - LAB_CHARGE
+            - PANEL_CHARGE
+        invoiceStatus:
+          type: string
+          enum:
+            - PAID
+            - PARTIALLY_PAID
+            - UNPAID
+        totalAmount:
+          type: number
+        paidAmount:
+          type: number
+        balanceAmount:
+          type: number
+    InsuranceDetailsDto:
+      type: object
+      properties:
+        insuranceUuid:
+          type: string
+          format: uuid
+        patientUuid:
+          type: string
+          format: uuid
+        insuranceName:
+          type: string
+        insuranceType:
+          type: string
+          enum:
+            - PRIMARY
+            - SECONDARY
+        memberId:
+          type: string
+        groupId:
+          type: string
+        groupName:
+          type: string
+        expiryDate:
+          type: string
+          format: date
+        frontSideKey:
+          type: string
+        backSideKey:
+          type: string
+        defaultInsurance:
+          type: boolean
+    ImagingResultRequest:
+      required:
+        - imagingOrderResult
+        - patientUuid
+      type: object
+      properties:
+        patientUuid:
+          type: string
+          format: uuid
+        imagingOrderResult:
+          type: boolean
+        imagingOrderUuid:
+          type: string
+          format: uuid
+        contactDirectoryUuid:
+          type: string
+          format: uuid
+        imagingType:
+          type: string
+        testName:
+          type: string
+        imagingResultInterpretation:
+          type: string
+          enum:
+            - NORMAL
+            - ABNORMAL
+            - CRITICAL
+            - INCONCLUSIVE
+            - NOT_AVAILABLE
+        providerUuid:
+          type: string
+          format: uuid
+        recordedDate:
+          type: string
+          format: date
+        recordedTime:
+          $ref: "#/components/schemas/LocalTime"
+        fileKey:
+          type: string
+        fileType:
+          type: string
+        note:
+          type: string
+    ImagingOrderRequest:
+      required:
+        - contactDirectoryUuid
+        - faxPrelimToOffice
+        - icdCodeIdSet
+        - orderStudyIdSet
+        - patientBackWithFilm
+        - patientHomeIfNegative
+        - patientIsPregnant
+        - patientUuid
+        - providerUuid
+        - routineChannels
+      type: object
+      properties:
+        patientUuid:
+          type: string
+          format: uuid
+        providerUuid:
+          type: string
+          format: uuid
+        contactDirectoryUuid:
+          type: string
+          format: uuid
+        orderStudyIdSet:
+          uniqueItems: true
+          type: array
+          items:
+            type: integer
+            format: int64
+        icdCodeIdSet:
+          uniqueItems: true
+          type: array
+          items:
+            type: integer
+            format: int64
+        instructionsToCenter:
+          type: string
+        routineChannels:
+          type: boolean
+        faxPrelimToOffice:
+          type: boolean
+        patientIsPregnant:
+          type: boolean
+        patientBackWithFilm:
+          type: boolean
+        patientHomeIfNegative:
+          type: boolean
+        collectionDate:
+          type: string
+          format: date
+        collectionTime:
+          $ref: "#/components/schemas/LocalTime"
+        imagingOrderStatus:
+          type: string
+          enum:
+            - SEND
+            - DRAFT
+            - RECEIVED
+        chartNote:
+          type: string
+    IcdCodeDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        uuid:
+          type: string
+          format: uuid
+        code:
+          type: string
+        description:
+          type: string
+        type:
+          type: string
+          enum:
+            - ICD_10
+    FamilyHistoryDto:
+      required:
+        - problemName
+        - relation
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: uuid
+        problemName:
+          pattern: ^[a-zA-Z0-9\s]+$
+          type: string
+        relation:
+          type: string
+          enum:
+            - ALL
+            - SELF
+            - SPOUSE
+            - SIBLING
+            - MOTHER
+            - FATHER
+            - GUARDIAN
+            - PARENT
+            - CHILDREN
+            - GRANDPARENT
+            - GRANDCHILDREN
+            - FRIEND
+            - PARTNER
+            - OTHER
+        onsetAge:
+          type: integer
+          format: int32
+        alive:
+          type: boolean
+        note:
+          type: string
+        recordedDate:
+          type: string
+          format: date
+        patientUuid:
+          type: string
+          format: uuid
+    DrugIntoleranceDto:
+      required:
+        - substance
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: uuid
+        substance:
+          type: string
+          enum:
+            - MORPHINE
+            - HEROIN
+            - OXYCODONE
+            - FENTANYL
+            - DIAZEPAM
+            - ALPRAZOLAM
+            - LORAZEPAM
+            - PHENOBARBITAL
+            - THIOPENTAL
+            - ALCOHOL
+            - AMPHETAMINE
+            - METHAMPHETAMINE
+            - METHYLPHENIDATE
+            - COCAINE
+            - CAFFEINE
+            - NICOTINE
+            - LSD
+            - PSILOCYBIN
+            - MESCALINE
+            - MDMA
+            - CANNABIS
+            - FLUOXETINE
+            - ANTIPSYCHOTICS
+            - BETA_BLOCKERS
+            - NITROGLYCERIN
+            - OXYMETAZOLINE
+            - LAXATIVES
+            - PROTON_PUMP_INHIBITORS
+            - DIPHENHYDRAMINE
+        reaction:
+          type: array
+          items:
+            $ref: "#/components/schemas/ReactionDto"
+        severity:
+          type: string
+          enum:
+            - MILD
+            - MODERATE
+            - SEVERE
+        status:
+          type: string
+          enum:
+            - ACTIVE
+            - HISTORICAL
+            - RESOLVED
+        onsetDate:
+          type: string
+          format: date
+        patientUuid:
+          type: string
+          format: uuid
+    ReactionDto:
+      type: object
+      properties:
+        reaction:
+          type: string
+    UpdateDocumentTypeRequest:
+      required:
+        - documentType
+        - uuid
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: uuid
+        documentType:
+          type: string
+    DiagnosisDto:
+      required:
+        - icdCodeUuid
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: uuid
+        status:
+          type: string
+          enum:
+            - ACTIVE
+            - HISTORICAL
+            - RESOLVED
+        type:
+          type: string
+          enum:
+            - ACUTE
+            - CHRONIC
+        onsetDate:
+          type: string
+          format: date
+        note:
+          type: string
+        recordedDate:
+          type: string
+          format: date
+        resolvedDate:
+          type: string
+          format: date
+        icdCodeDto:
+          $ref: "#/components/schemas/IcdCodeDto"
+        patientUuid:
+          type: string
+          format: uuid
+        icdCodeUuid:
+          type: string
+          format: uuid
+    AllergyDto:
+      required:
+        - name
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: uuid
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+            - DRUG
+            - ENVIRONMENT
+            - FOOD
+        reaction:
+          type: array
+          items:
+            $ref: "#/components/schemas/ReactionDto"
+        severity:
+          type: string
+          enum:
+            - MILD
+            - MODERATE
+            - SEVERE
+        status:
+          type: boolean
+        onsetDate:
+          type: string
+          format: date
+        patientUuid:
+          type: string
+          format: uuid
+    PatientLinkedPharmacyDto:
+      required:
+        - pharmacyUuid
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: uuid
+        pharmacyUuid:
+          type: string
+          format: uuid
+        defaultPharmacy:
+          type: boolean
+        patientUuid:
+          type: string
+          format: uuid
+    DocumentTypeRequest:
+      required:
+        - documentTypes
+      type: object
+      properties:
+        documentTypes:
+          type: array
+          items:
+            type: string
+    DocumentRequest:
+      required:
+        - documentTypeUuid
+        - fileKey
+        - fileName
+        - patientUuid
+      type: object
+      properties:
+        patientUuid:
+          type: string
+          format: uuid
+        documentTypeUuid:
+          type: string
+          format: uuid
+        fileName:
+          type: string
+        fileKey:
+          type: string
+        fileType:
+          type: string
+        date:
+          type: string
+          format: date
+    ContactDirectoryRequest:
+      required:
+        - name
+        - referralType
+      type: object
+      properties:
+        referralType:
+          type: string
+          enum:
+            - IMAGING
+            - SPECIALIST
+        name:
+          type: string
+        lastName:
+          type: string
+        fax:
+          type: string
+        phone:
+          type: string
+        email:
+          type: string
+        addressDto:
+          $ref: "#/components/schemas/AddressDto"
+  securitySchemes:
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
